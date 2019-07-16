@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = function (grunt) {
-
   var fs = require("fs"),
     Util = {
 
@@ -106,34 +105,6 @@ module.exports = function (grunt) {
             dest: disDir + 'index.html'
           }
         ]
-      },
-      php: {
-
-        expand: true,
-        src: 'php/**',
-        dest: disDir
-
-      },
-      asp: {
-
-        expand: true,
-        src: 'asp/**',
-        dest: disDir
-
-      },
-      jsp: {
-
-        expand: true,
-        src: 'jsp/**',
-        dest: disDir
-
-      },
-      net: {
-
-        expand: true,
-        src: 'net/**',
-        dest: disDir
-
       }
     },
     transcoding: {
