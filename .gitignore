@@ -1,4 +1,4 @@
-node_modules
-dist
-asp/upload
-.vscode
+
+.idea/
+node_modules/
+dist/
