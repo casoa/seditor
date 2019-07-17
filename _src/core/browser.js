@@ -16,18 +16,12 @@ var browser = UM.browser = function () {
    */
   var browser = {
     ie: !!document.documentMode,
+    edge: !!window.StyleMedia,
     webkit: navigator.userAgent.indexOf(' AppleWebKit/') > -1,
     gecko: typeof window.InstallTrigger !== 'undefined',
     mac: navigator.userAgent.indexOf('Macintosh') > -1,
     quirks: document.compatMode === 'BackCompat', // 检测当前浏览器是否处于“怪异模式”下
   };
-
-  /**
-   * 如果使用了不支持的浏览器，则直接报错
-   */
-  if (!(browser.chrome || browser.gecko || browser.webkit || browser.mac)) {
-    throw new Error('unsupport browser: ' + navigator.userAgent);
-  }
 
   /**
    * 浏览器版本号
@@ -68,6 +62,13 @@ var browser = UM.browser = function () {
   browser.version = version;
 
   console.log(JSON.stringify(browser));
+
+  /**
+   * 如果使用了不支持的浏览器，则直接报错
+   */
+  if (browser.edge || !(browser.chrome || browser.gecko || browser.webkit || browser.mac)) {
+    throw new Error('unsupport browser: ' + navigator.userAgent);
+  }
 
   return browser;
 }();
