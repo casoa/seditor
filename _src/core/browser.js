@@ -1,4 +1,3 @@
-
 /**
  * 提供浏览器检测的模块
  * @module UE.browser

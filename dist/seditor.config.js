@@ -1,3 +1,8 @@
+etpl.config({
+  commandOpen: '<%',
+  commandClose: '%>'
+});
+
 window.UMEDITOR_CONFIG = {
 
   //为编辑器实例添加一个路径，这个不能被注释
@@ -33,8 +38,8 @@ window.UMEDITOR_CONFIG = {
   initialContent: '',
 
   // 初始化编辑器宽度/高度
-  initialFrameWidth: 500,
-  initialFrameHeight: 500,
+  //initialFrameWidth: 500,
+  //initialFrameHeight: 500,
 
   // 是否自动清除编辑器初始内容
   // 注意：如果focus属性设置为true，这个也为true，那么编辑器一上来就会触发导致初始化的内容看不到了
