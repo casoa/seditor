@@ -25,10 +25,6 @@ var filterWord = UM.filterWord = function () {
             .replace( /<!--[\s\S]*?-->/ig, "" )
             //转换图片
             .replace(/<v:shape [^>]*>[\s\S]*?.<\/v:shape>/gi,function(str){
-                //opera能自己解析出image所这里直接返回空
-                if(browser.opera){
-                    return '';
-                }
                 try{
                     //有可能是bitmap占为图，无用，直接过滤掉，主要体现在粘贴excel表格中
                     if(/Bitmap/i.test(str)){

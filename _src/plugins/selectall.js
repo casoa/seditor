@@ -18,10 +18,6 @@ UM.plugins['selectall'] = function(){
                 range = me.selection.getRange();
             range.selectNodeContents(body);
             if(domUtils.isEmptyBlock(body)){
-                //opera不能自动合并到元素的里边，要手动处理一下
-                if(browser.opera && body.firstChild && body.firstChild.nodeType == 1){
-                    range.setStartAtFirst(body.firstChild);
-                }
                 range.collapse(true);
             }
             range.select(true);

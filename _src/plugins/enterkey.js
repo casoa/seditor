@@ -54,8 +54,6 @@ UM.plugins['enterkey'] = function() {
                         me.undoManger.save();
                     }
                 }
-                //没有站位符，会出现多行的问题
-                browser.opera &&  range.select();
             }else{
                 me.fireEvent('saveScene',true,true)
             }
@@ -93,9 +91,7 @@ UM.plugins['enterkey'] = function() {
 
                     start = domUtils.findParentByTagName(range.startContainer, ['ol','ul','p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6','blockquote','caption'], true);
 
-                    //opera下执行formatblock会在table的场景下有问题，回车在opera原生支持很好，所以暂时在opera去掉调用这个原生的command
-                    //trace:2431
-                    if (!start && !browser.opera) {
+                    if (!start) {
 
                         me.document.execCommand('formatBlock', false, '<p>');
 

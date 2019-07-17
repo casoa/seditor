@@ -156,9 +156,9 @@ UM.plugins['paste'] = function () {
             if (!range.collapsed && me.undoManger) {
                 me.undoManger.save();
             }
-        }).on(browser.ie || browser.opera ? 'keydown' : 'paste', function (e) {
+        }).on(browser.ie ? 'keydown' : 'paste', function (e) {
             //ie下beforepaste在点击右键时也会触发，所以用监控键盘才处理
-            if ((browser.ie || browser.opera) && ((!e.ctrlKey && !e.metaKey) || e.keyCode != '86')) {
+            if (browser.ie && ((!e.ctrlKey && !e.metaKey) || e.keyCode != '86')) {
                 return;
             }
             getClipboardData.call(me, function (div) {

@@ -580,7 +580,7 @@ var domUtils = dom.domUtils = {
      * @name unSelectable
      * @grammar UM.dom.domUtils.unSelectable(node)
      */
-    unSelectable: ie && browser.ie9below || browser.opera ? function (node) {
+    unSelectable: ie && browser.ie9below ? function (node) {
         //for ie9
         node.onselectstart = function () {
             return false;
@@ -810,7 +810,7 @@ var domUtils = dom.domUtils = {
     isBr: function (node) {
         return node.nodeType == 1 && node.tagName == 'BR';
     },
-    
+
     isEmptyBlock: function (node, reg) {
         if (node.nodeType != 1)
             return 0;

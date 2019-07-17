@@ -755,12 +755,6 @@
                 // trace:870 chrome/safari后边是br对于闭合得range不能定位 所以去掉了判断
                 // this.startContainer.nodeType != 3 &&! ((child = this.startContainer.childNodes[this.startOffset]) && child.nodeType == 1 && child.tagName == 'BR'
                 if (this.collapsed && !notInsertFillData) {
-//                    //opear如果没有节点接着，原生的不能够定位,不能在body的第一级插入空白节点
-//                    if (notInsertFillData && browser.opera && !domUtils.isBody(this.startContainer) && this.startContainer.nodeType == 1) {
-//                        var tmp = this.document.createTextNode('');
-//                        this.insertNode(tmp).setStart(tmp, 0).collapse(true);
-//                    }
-//
                     //处理光标落在文本节点的情况
                     //处理以下的情况
                     //<b>|xxxx</b>
@@ -789,27 +783,6 @@
                     }
                 }
                 var nativeRange = this.document.createRange();
-                if(this.collapsed && browser.opera && this.startContainer.nodeType == 1){
-                    var child = this.startContainer.childNodes[this.startOffset];
-                    if(!child){
-                        //往前靠拢
-                        child = this.startContainer.lastChild;
-                        if( child && domUtils.isBr(child)){
-                            this.setStartBefore(child).collapse(true);
-                        }
-                    }else{
-                        //向后靠拢
-                        while(child && domUtils.isBlockElm(child)){
-                            if(child.nodeType == 1 && child.childNodes[0]){
-                                child = child.childNodes[0]
-                            }else{
-                                break;
-                            }
-                        }
-                        child && this.setStartBefore(child).collapse(true)
-                    }
-
-                }
                 //是createAddress最后一位算的不准，现在这里进行微调
                 checkOffset(this);
                 nativeRange.setStart(this.startContainer, this.startOffset);
@@ -818,7 +791,7 @@
             }
             return this;
         },
-      
+
 
         createAddress : function(ignoreEnd,ignoreTxt){
             var addr = {},me = this;
