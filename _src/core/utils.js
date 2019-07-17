@@ -190,7 +190,9 @@ var utils = UM.utils = {
    * @grammar UM.utils.listToMap(list)  => Object  //Object形如{test:1,br:1,textarea:1}
    */
   listToMap: function (list) {
-    if (!list) return {};
+    if (!list) {
+      return {};
+    }
     list = utils.isArray(list) ? list : list.split(',');
     for (var i = 0, ci, obj = {}; ci = list[i++];) {
       obj[ci.toUpperCase()] = obj[ci] = 1;
