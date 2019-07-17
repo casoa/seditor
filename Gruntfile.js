@@ -2,8 +2,8 @@
 
 module.exports = function (grunt) {
   const pkg = grunt.file.readJSON('package.json');
-  const disDir = "dist/utf8-php/";
-  const banner = '/*!\n * UEditor Mini版本\n * version: <%= pkg.version %>\n * build: <%= new Date() %>\n */\n\n';
+  const releasedir = "dist/";
+  const banner = '/*!\n * seditor version: <%= pkg.version %>\n * build: <%= new Date() %>\n */\n\n';
 
   grunt.initConfig({
     pkg: pkg,
@@ -78,7 +78,7 @@ module.exports = function (grunt) {
           '_src/adapter/source.js',
           '_src/adapter/combobox.js'
         ],
-        dest: disDir + '<%= pkg.name %>.js'
+        dest: releasedir + '<%= pkg.name %>.js'
       },
       css: {
         src: [
@@ -96,7 +96,7 @@ module.exports = function (grunt) {
           'themes/default/_css/colorpicker.css',
           'themes/default/_css/separator.css'
         ],
-        dest: disDir + 'themes/default/css/umeditor.css'
+        dest: releasedir + 'themes/default/css/umeditor.css'
       }
     },
     cssmin: {
@@ -105,16 +105,16 @@ module.exports = function (grunt) {
       },
       files: {
         expand: true,
-        cwd: disDir + 'themes/default/css/',
+        cwd: releasedir + 'themes/default/css/',
         src: ['*.css', '!*.min.css'],
-        dest: disDir + 'themes/default/css/',
+        dest: releasedir + 'themes/default/css/',
         ext: '.min.css'
       }
     },
     closurecompiler: {
       dist: {
-        src: disDir + '<%= pkg.name %>.js',
-        dest: disDir + '<%= pkg.name %>.min.js'
+        src: releasedir + '<%= pkg.name %>.js',
+        dest: releasedir + '<%= pkg.name %>.min.js'
       }
     },
     copy: {
@@ -127,7 +127,7 @@ module.exports = function (grunt) {
               'third-party/**',
               'lang/**'
             ],
-            dest: disDir
+            dest: releasedir
           }
         ]
       },
@@ -139,31 +139,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-closurecompiler');
   grunt.loadNpmTasks('grunt-contrib-copy');
 
-  grunt.registerTask('default', 'UEditor Mini build', function () {
-    var tasks = [
+  grunt.registerTask('default', 'seditor build', function () {
+    grunt.task.run([
       'concat',
       'cssmin',
       'closurecompiler',
       'copy:base'
-    ];
-    //config修改
-    updateConfigFile();
-    grunt.task.run(tasks);
+    ]);
   });
-
-  function updateConfigFile () {
-    var filename = 'umeditor.config.js',
-      file = grunt.file.read(filename),
-      path = "php/",
-      suffix = ".php";
-
-    file = file.replace(/php\//ig, path).replace(/\.php/ig, suffix);
-
-    // 写入到dist
-    if (grunt.file.write(disDir + filename, file)) {
-      grunt.log.writeln('config file update success');
-    } else {
-      grunt.log.warn('config file update error');
-    }
-  }
 };
